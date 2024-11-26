@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Box</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+    #chatBox {
+      width: 100%;
+      height: 100%;
+      max-width: 600px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header{
+                background-color: rgb(7, 73, 11);
+                color: rgb(253, 250, 250);
+                font-size: larger;
+                padding: 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    }
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      height: 300px;
+    }
+    .message {
+      padding: 5px;
+      margin: 5px 0;
+      background-color: #a5daa9;
+      border-radius: 5px;
+    }
+    .sent {
+      background-color: #7dd175;
+      width: 100%;
+      align-self: flex-end;
+    }
+    .received {
+      background-color: #afbeb0;
+      width: 100%;
+      align-self: flex-start;
+    }
+    #inputArea {
+      display: flex;
+      border-top: 1px solid #a5daa9;
+    }
+    #inputArea input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #inputArea button {
+      padding: 10px;
+      border: none;
+      background-color: #114d14;
+      color: white;
+      cursor: pointer;
+    }
+    #inputArea button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="chatBox">
+    <div class="chat-header">praveen's whatsapp</div>
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="messageInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+
+    function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const message = input.value.trim();
+
+      if (message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message", "sent");
+        messageDiv.textContent = message;
+        messagesDiv.appendChild(messageDiv);
+
+        // Simulate receiving a reply
+        setTimeout(() => {
+          const replyDiv = document.createElement("div");
+          replyDiv.classList.add("message", "received");
+          replyDiv.textContent = "Reply: " + message;
+          messagesDiv.appendChild(replyDiv);
+          messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 1000);
+
+        input.value = "";
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
